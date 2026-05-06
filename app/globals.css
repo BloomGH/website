@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Brand palette */
+  --color-navy: #1e2d42;
+  --color-navy-700: #2a3d56;
+  --color-navy-50: #f4f6fa;
+
+  --color-plum: #7a2850;
+  --color-plum-600: #8c3360;
+  --color-plum-50: #fbf3f7;
+
+  --color-periwinkle: #bcd2ee;
+  --color-periwinkle-200: #d4e2f3;
+  --color-periwinkle-50: #eef4fb;
+
+  --color-ink: #1e2d42;
+  --color-ink-soft: #4a5568;
+  --color-ink-muted: #6b7280;
+  --color-line: #e6ebf2;
+  --color-surface: #ffffff;
+  --color-surface-tinted: #f8fafc;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-lora), ui-serif, Georgia, serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  background: var(--color-surface);
+  color: var(--color-ink);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-feature-settings: "ss01", "cv11";
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-periwinkle);
+  color: var(--color-navy);
 }
