@@ -2,67 +2,52 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { BloomLockup } from "./components";
+import { OmayaLockup, OMAYA_WHATSAPP } from "./components";
 
-const HOSPITAL_LINKS = [
-  { href: "/#problem", label: "The problem" },
-  { href: "/#how", label: "How it works" },
-  { href: "/#hospitals", label: "Why hospitals" },
-  { href: "/#trust", label: "Safety" },
+const NAV_LINKS = [
+  { href: "/#product", label: "Product" },
+  { href: "/#audiences", label: "For hospitals & mothers" },
+  { href: "/#pilot", label: "Pilot" },
 ];
 
 export function SiteNav() {
   const [open, setOpen] = useState(false);
-  const pathname = usePathname();
-  const onMothersPage = pathname?.startsWith("/for-mothers");
-
   const close = () => setOpen(false);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/85 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href="/"
-          aria-label="Bloom home"
+          aria-label="Omaya home"
           className="flex items-center"
           onClick={close}
         >
-          <BloomLockup height={28} />
+          <OmayaLockup />
         </Link>
 
         <nav className="hidden items-center gap-7 text-sm text-ink-soft md:flex">
-          {!onMothersPage &&
-            HOSPITAL_LINKS.map((l) => (
-              <Link key={l.href} href={l.href} className="hover:text-navy">
-                {l.label}
-              </Link>
-            ))}
-          <Link
-            href={onMothersPage ? "/" : "/for-mothers"}
-            className={`hover:text-navy ${
-              onMothersPage ? "text-navy font-medium" : ""
-            }`}
-          >
-            {onMothersPage ? "For hospitals" : "For mothers"}
-          </Link>
+          {NAV_LINKS.map((link) => (
+            <Link key={link.href} href={link.href} className="hover:text-navy">
+              {link.label}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-2">
-          <Link
-            href="/#pilot"
-            className="hidden md:inline-flex items-center rounded-full bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy-700"
+          <a
+            href={OMAYA_WHATSAPP}
+            className="hidden min-h-10 items-center rounded-full bg-navy px-4 py-2 text-sm font-medium text-white transition hover:bg-navy-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-plum focus-visible:ring-offset-2 md:inline-flex"
           >
-            Request a pilot
-          </Link>
+            Book a call
+          </a>
           <button
             type="button"
             aria-label={open ? "Close menu" : "Open menu"}
             aria-expanded={open}
-            onClick={() => setOpen((v) => !v)}
-            className="md:hidden flex h-10 w-10 items-center justify-center rounded-full border border-line text-navy"
+            onClick={() => setOpen((value) => !value)}
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-line text-navy transition hover:border-navy focus:outline-none focus-visible:ring-2 focus-visible:ring-plum focus-visible:ring-offset-2 md:hidden"
           >
-            <span className="sr-only">Toggle menu</span>
             <svg
               viewBox="0 0 24 24"
               className="h-5 w-5"
@@ -73,7 +58,7 @@ export function SiteNav() {
               aria-hidden
             >
               {open ? (
-                <path d="M6 6l12 12M6 18L18 6" />
+                <path d="M6 6l12 12M6 18 18 6" />
               ) : (
                 <path d="M4 7h16M4 12h16M4 17h16" />
               )}
@@ -83,33 +68,25 @@ export function SiteNav() {
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-line bg-white">
+        <div className="border-t border-line bg-white md:hidden">
           <div className="mx-auto flex max-w-6xl flex-col gap-1 px-6 py-4 text-sm text-ink-soft">
-            {!onMothersPage &&
-              HOSPITAL_LINKS.map((l) => (
-                <Link
-                  key={l.href}
-                  href={l.href}
-                  onClick={close}
-                  className="rounded-md px-2 py-2 hover:bg-periwinkle-50 hover:text-navy"
-                >
-                  {l.label}
-                </Link>
-              ))}
-            <Link
-              href={onMothersPage ? "/" : "/for-mothers"}
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={close}
+                className="rounded-md px-2 py-2 hover:bg-periwinkle-50 hover:text-navy"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href={OMAYA_WHATSAPP}
               onClick={close}
-              className="rounded-md px-2 py-2 hover:bg-periwinkle-50 hover:text-navy"
+              className="mt-2 inline-flex min-h-10 items-center justify-center rounded-full bg-navy px-4 py-2.5 text-sm font-medium text-white"
             >
-              {onMothersPage ? "For hospitals" : "For mothers"}
-            </Link>
-            <Link
-              href="/#pilot"
-              onClick={close}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-navy px-4 py-2.5 text-sm font-medium text-white"
-            >
-              Request a pilot
-            </Link>
+              Book a call
+            </a>
           </div>
         </div>
       )}

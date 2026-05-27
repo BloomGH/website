@@ -1,1119 +1,524 @@
-import Link from "next/link";
+import Image from "next/image";
+import heroImage from "../public/assets/call_by_window-omaya.png";
 import {
   ArrowRight,
-  AudioSample,
-  CareTagline,
   Check,
-  Cross,
-  FlowerMark,
-  MediaPlaceholder,
+  OMAYA_EMAIL,
+  OMAYA_PHONE_DISPLAY,
+  OMAYA_PHONE_TEL,
+  OMAYA_WHATSAPP,
+  OmayaMark,
 } from "./components";
 import { ContactForm } from "./contact-form";
+import {
+  FadeUp,
+  HeroParallax,
+  Stagger,
+  StaggerItem,
+} from "./animations";
+
+const PRODUCT_STEPS = [
+  {
+    title: "Enroll at discharge",
+    body: "A nurse adds the mother, delivery notes, language, and next check-in before she leaves.",
+  },
+  {
+    title: "Check in by call and SMS",
+    body: "Omaya asks about pain, bleeding, mood, sleep, feeding, medication, and warning signs.",
+  },
+  {
+    title: "Escalate the few who need care",
+    body: "Stable updates are logged. Concerning answers go to the clinical team with context.",
+  },
+];
+
+const PILOT_STEPS = [
+  "Map your discharge workflow.",
+  "Enroll a first cohort of mothers.",
+  "Review alerts, response time, and patient feedback.",
+];
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <SocialProof />
-      <ProblemSection />
-      <HowItWorks />
-      <TrustSection />
-      <BusinessCase />
-      <Founders />
-      <ForMothersTeaser />
-      <Pricing />
-      <Faq />
-      <FinalCta />
+      <SignalStrip />
+      <ProductSection />
+      <AudienceSection />
+      <PilotSection />
+      <ContactSection />
     </>
   );
 }
 
-/* -------------------- Hero -------------------- */
-
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div aria-hidden className="absolute inset-0 -z-10">
-        <div className="absolute -top-32 -left-24 h-96 w-96 rounded-full bg-periwinkle-50" />
-        <div className="absolute right-0 top-40 h-80 w-80 rounded-full bg-plum-50" />
-        <FlowerMark
-          className="absolute -bottom-24 -left-20 h-[28rem] w-[28rem] opacity-[0.05] -rotate-12"
-          size={448}
+    <section className="relative isolate min-h-[78svh] overflow-hidden bg-navy text-white">
+      <HeroParallax className="absolute inset-0 -z-20">
+        <Image
+          src={heroImage}
+          alt="A mother taking an Omaya care call at home"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[62%_center]"
         />
-      </div>
+      </HeroParallax>
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(30,45,66,0.94)_0%,rgba(30,45,66,0.78)_42%,rgba(30,45,66,0.28)_100%)]"
+      />
 
-      <div className="mx-auto grid max-w-6xl gap-12 px-6 pt-16 pb-24 md:grid-cols-[1.05fr_1fr] md:items-center md:pt-24 md:pb-32">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-periwinkle bg-periwinkle-50 px-3 py-1 text-xs font-medium tracking-wide text-navy uppercase">
-            <span className="h-1.5 w-1.5 rounded-full bg-plum" />
-            For private maternity hospitals in Ghana
-          </span>
-          <h1 className="mt-6 font-serif text-5xl leading-[1.05] tracking-tight text-navy md:text-6xl">
-            Stop the postpartum <br />
-            <span className="text-plum">drop-off.</span>
-          </h1>
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-            Bloom is the AI continuity layer that follows her home — checking on
-            every mother in your care for six weeks, surfacing red flags to your
-            clinical team, and giving your hospital a standard of follow-up
-            competitors can&rsquo;t match.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href="#pilot"
-              className="inline-flex items-center rounded-full bg-plum px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-plum-600"
-            >
-              Request a pilot
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-            <a
-              href="#how"
-              className="inline-flex items-center rounded-full border border-line bg-white px-6 py-3 text-sm font-semibold text-navy transition hover:border-navy"
-            >
-              See how it works
-            </a>
-          </div>
-          <dl className="mt-12 grid grid-cols-3 gap-6 border-t border-line pt-8">
-            <Stat value="6 weeks" label="of post-discharge cover, per mother" />
-            <Stat value="3 minutes" label="to onboard a mother at discharge" />
-            <Stat value="5–7" label="scheduled touchpoints per mother" />
+      <div className="mx-auto flex max-w-6xl flex-col justify-end px-6 pb-16 pt-28 md:min-h-[78svh] md:pb-20">
+        <Stagger className="max-w-xs sm:max-w-2xl" interval={0.15}>
+          <StaggerItem>
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-periwinkle" />
+              <span className="sm:hidden">Pilot in Ghana</span>
+              <span className="hidden sm:inline">
+                Piloting maternal continuity in Ghana
+              </span>
+            </span>
+          </StaggerItem>
+          <StaggerItem>
+            <h1 className="mt-6 font-serif text-6xl leading-[0.95] tracking-tight md:text-8xl">
+              Omaya
+            </h1>
+          </StaggerItem>
+          <StaggerItem>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/[0.86] sm:text-xl md:text-2xl">
+              Check-ins for mothers. Escalation alerts for hospitals.
+            </p>
+          </StaggerItem>
+          <StaggerItem>
+            <div className="mt-8 flex max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:items-center">
+              <a
+                href="#contact"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full bg-plum px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-plum-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy sm:w-auto"
+              >
+                Request a pilot
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+              <a
+                href={OMAYA_WHATSAPP}
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/30 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy sm:w-auto"
+              >
+                Book a call
+              </a>
+              <a
+                href="#contact"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-full border border-white/25 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy sm:w-auto"
+              >
+                Join waitlist
+              </a>
+            </div>
+          </StaggerItem>
+        </Stagger>
+
+        <FadeUp delay={0.7}>
+          <dl className="mt-14 grid max-w-3xl gap-5 border-t border-white/20 pt-6 text-white/90 sm:grid-cols-3">
+            <HeroStat value="1 year" label="after-discharge follow-up" />
+            <HeroStat value="No app" label="calls and SMS work on any phone" />
+            <HeroStat value="Human-led" label="clinical team stays in control" />
           </dl>
-        </div>
-
-        <HeroVisual />
+        </FadeUp>
       </div>
     </section>
   );
 }
 
-function Stat({ value, label }: { value: string; label: string }) {
+function HeroStat({ value, label }: { value: string; label: string }) {
   return (
     <div>
-      <dt className="font-serif text-2xl text-navy">{value}</dt>
-      <dd className="mt-1 text-xs leading-snug text-ink-muted">{label}</dd>
+      <dt className="font-serif text-2xl text-white">{value}</dt>
+      <dd className="mt-1 text-sm leading-snug text-white/70">{label}</dd>
     </div>
   );
 }
 
-function HeroVisual() {
+function SignalStrip() {
   return (
-    <div className="relative">
-      {/* Primary: clinician dashboard mock */}
-      <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-line bg-white/80 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted backdrop-blur">
-        <span className="h-1.5 w-1.5 rounded-full bg-plum" />
-        [ Product preview · in pilot ]
+    <section className="border-y border-line bg-white">
+      <Stagger className="mx-auto grid max-w-6xl gap-6 px-6 py-8 md:grid-cols-3">
+        <StaggerItem>
+          <Signal label="For hospitals" value="A triaged queue, not a call list." />
+        </StaggerItem>
+        <StaggerItem>
+          <Signal label="For mothers" value="Support that follows her home." />
+        </StaggerItem>
+        <StaggerItem>
+          <Signal label="For pilot teams" value="Fast setup, clear review." />
+        </StaggerItem>
+      </Stagger>
+    </section>
+  );
+}
+
+function Signal({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-plum">
+        {label}
       </p>
-      <div className="relative rounded-2xl border border-line bg-white p-6 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
-              Ridge Hospital · Today
+      <p className="mt-2 font-serif text-2xl leading-tight text-navy">{value}</p>
+    </div>
+  );
+}
+
+function ProductSection() {
+  return (
+    <section id="product" className="bg-surface-tinted">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 py-20 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <div>
+          <FadeUp>
+            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
+              Product
             </p>
-            <p className="mt-1 font-serif text-lg text-navy">
-              Postnatal queue
+            <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
+              Know who needs help after discharge.
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft">
+              Omaya follows up with mothers after birth, records what changed, and
+              gives hospital teams the short list that needs attention.
             </p>
-          </div>
-          <span className="rounded-full bg-plum px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
-            2 escalations
-          </span>
+          </FadeUp>
+
+          <Stagger className="mt-8 grid gap-4">
+            {PRODUCT_STEPS.map((step, index) => (
+              <StaggerItem key={step.title}>
+                <ProductStep index={index + 1} {...step} />
+              </StaggerItem>
+            ))}
+          </Stagger>
         </div>
 
-        <ul className="mt-5 divide-y divide-line text-sm">
-          <QueueRow
-            initials="AO"
-            name="Akosua O."
-            day="Day 6 · C-section"
-            tag="Level 3"
-            tagTone="plum"
-            note="Reports fever 38.4°C · wound site tender"
-          />
-          <QueueRow
-            initials="ND"
-            name="Naa D."
-            day="Day 11 · vaginal"
-            tag="Level 3"
-            tagTone="plum"
-            note="PHQ-2 elevated · two missed iron doses"
-          />
-          <QueueRow
-            initials="AM"
-            name="Ama M."
-            day="Day 4 · vaginal"
-            tag="Stable"
-            tagTone="periwinkle"
-            note="Pain 3/10 · feeding well · reassured"
-          />
-        </ul>
+        <FadeUp delay={0.3}>
+          <ProductMock />
+        </FadeUp>
+      </div>
+    </section>
+  );
+}
 
-        <div className="mt-5 flex items-center justify-between rounded-xl bg-surface-tinted px-4 py-3">
-          <p className="text-xs text-ink-soft">
-            <span className="font-semibold text-navy">14 mothers</span> stable —
-            auto-cleared
-          </p>
-          <span className="text-[10px] uppercase tracking-wide text-ink-muted">
-            Updated 2:14 PM
-          </span>
+function ProductStep({
+  index,
+  title,
+  body,
+}: {
+  index: number;
+  title: string;
+  body: string;
+}) {
+  return (
+    <article className="rounded-lg border border-line bg-white p-5">
+      <div className="flex gap-4">
+        <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-plum text-sm font-semibold text-white">
+          {index}
+        </span>
+        <div>
+          <h3 className="font-semibold text-navy">{title}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-ink-soft">{body}</p>
         </div>
       </div>
+    </article>
+  );
+}
 
-      {/* Secondary: SMS bubble peek */}
-      <div className="mt-4 md:mt-0 md:absolute md:-bottom-10 md:-right-6 md:w-72 rounded-2xl border border-line bg-white p-5 shadow-lg">
+function ProductMock() {
+  return (
+    <div className="rounded-lg border border-line bg-white p-4 shadow-sm sm:p-6">
+      <div className="flex items-center justify-between gap-4 border-b border-line pb-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-plum-50 font-serif text-plum">
-            A
-          </div>
-          <div>
-            <p className="text-sm font-semibold text-navy">Ama · Day 4</p>
-            <p className="text-[11px] text-ink-muted">SMS check-in</p>
-          </div>
-          <span className="ml-auto rounded-full bg-periwinkle-50 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-navy">
-            Stable
+          <span className="flex h-10 w-10 items-center justify-center rounded-full bg-plum-50 text-plum">
+            <OmayaMark className="h-5 w-5" />
           </span>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+              Omaya care queue
+            </p>
+            <p className="font-serif text-xl text-navy">Today</p>
+          </div>
         </div>
-        <div className="mt-4 space-y-2">
-          <Bubble side="in">How are you feeling — sleep, mood, pain?</Bubble>
-          <Bubble side="out">Tired but okay. Pain about 3.</Bubble>
-        </div>
+        <span className="rounded-full bg-plum px-3 py-1 text-xs font-semibold text-white">
+          2 escalations
+        </span>
+      </div>
+
+      <div className="mt-5 grid gap-3">
+        <QueueRow
+          name="Akosua O."
+          detail="Day 6 after C-section"
+          status="Escalate"
+          note="Fever and wound tenderness reported."
+        />
+        <QueueRow
+          name="Naa D."
+          detail="Day 11 after birth"
+          status="Escalate"
+          note="Low mood and poor sleep for three days."
+        />
+        <QueueRow
+          name="Ama M."
+          detail="Day 4 after birth"
+          status="Stable"
+          note="Pain improving. Feeding going well."
+        />
+      </div>
+
+      <div className="mt-5 rounded-lg bg-surface-tinted p-4">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-plum">
+          SMS summary
+        </p>
+        <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+          Hi Ama, Omaya will check in again on Friday. Reply anytime if pain,
+          bleeding, mood, or feeding changes.
+        </p>
       </div>
     </div>
   );
 }
 
 function QueueRow({
-  initials,
   name,
-  day,
-  tag,
-  tagTone,
+  detail,
+  status,
   note,
 }: {
-  initials: string;
   name: string;
-  day: string;
-  tag: string;
-  tagTone: "plum" | "periwinkle";
+  detail: string;
+  status: "Escalate" | "Stable";
   note: string;
 }) {
-  const tagClass =
-    tagTone === "plum"
-      ? "bg-plum-50 text-plum"
-      : "bg-periwinkle-50 text-navy";
+  const urgent = status === "Escalate";
   return (
-    <li className="flex items-start gap-3 py-3">
-      <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-periwinkle-50 font-serif text-xs text-navy">
-        {initials}
-      </span>
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center justify-between gap-2">
-          <p className="font-medium text-navy truncate">{name}</p>
-          <span
-            className={`rounded px-2 py-0.5 text-[10px] font-medium ${tagClass}`}
-          >
-            {tag}
-          </span>
+    <div className="rounded-lg border border-line p-4">
+      <div className="flex items-start justify-between gap-4">
+        <div>
+          <p className="font-semibold text-navy">{name}</p>
+          <p className="mt-1 text-xs text-ink-muted">{detail}</p>
         </div>
-        <p className="mt-0.5 text-xs text-ink-soft truncate">{day}</p>
-        <p className="mt-1 text-xs text-ink-muted">{note}</p>
+        <span
+          className={`rounded-full px-2.5 py-1 text-[11px] font-semibold ${urgent ? "bg-plum-50 text-plum" : "bg-periwinkle-50 text-navy"
+            }`}
+        >
+          {status}
+        </span>
       </div>
-    </li>
-  );
-}
-
-function Bubble({
-  side,
-  children,
-}: {
-  side: "in" | "out";
-  children: React.ReactNode;
-}) {
-  if (side === "in") {
-    return (
-      <div className="max-w-[90%] rounded-2xl rounded-tl-sm bg-periwinkle-50 px-3.5 py-2 text-xs text-navy">
-        {children}
-      </div>
-    );
-  }
-  return (
-    <div className="ml-auto max-w-[90%] rounded-2xl rounded-tr-sm bg-navy px-3.5 py-2 text-xs text-white">
-      {children}
+      <p className="mt-3 text-sm leading-relaxed text-ink-soft">{note}</p>
     </div>
   );
 }
 
-/* -------------------- Social proof -------------------- */
-
-function SocialProof() {
+function AudienceSection() {
   return (
-    <section className="border-y border-line bg-white">
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-10 md:grid-cols-[1fr_auto] md:items-center">
-        <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.22em] text-plum">
-            In pilot
+    <section id="audiences" className="bg-white">
+      <div className="mx-auto max-w-6xl px-6 py-20">
+        <FadeUp className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
+            Who it helps
           </p>
-          <p className="mt-2 max-w-xl text-base leading-relaxed text-navy">
-            In active pilot conversations with leading private maternity
-            hospitals in <strong className="font-semibold">Accra</strong> and{" "}
-            <strong className="font-semibold">Kumasi</strong>. Clinical
-            protocols designed with senior Ghanaian midwives and obstetricians.
-          </p>
-        </div>
+          <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
+            One care loop, two clear experiences.
+          </h2>
+        </FadeUp>
 
-        <div className="flex items-center gap-4 rounded-2xl border border-line bg-surface-tinted p-4 md:max-w-sm">
-          <MediaPlaceholder
-            kind="image"
-            ratio="aspect-square"
-            label="Photo"
-            className="h-16 w-16 flex-none"
-          />
-          <div className="min-w-0">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-muted">
-              Clinical advisor
-            </p>
-            <p className="mt-1 font-serif text-base text-navy truncate">
-              [ Dr. Advisor Name ]
-            </p>
-            <p className="mt-0.5 text-xs text-ink-soft truncate">
-              [ FWACS · Affiliation ]
-            </p>
-          </div>
-        </div>
+        <Stagger className="mt-10 grid gap-6 md:grid-cols-2" interval={0.15}>
+          <StaggerItem>
+            <AudienceCard
+              title="For hospitals"
+              body="Reduce blind spots after discharge. Give midwives a focused queue, not a manual follow-up burden."
+              bullets={[
+                "3-minute enrollment",
+                "Triage by severity",
+                "Audit trail for each mother",
+              ]}
+              href="#contact"
+              cta="Request a pilot"
+            />
+          </StaggerItem>
+          <StaggerItem>
+            <AudienceCard
+              title="For mothers"
+              body="Get simple check-ins, reminders, and a path back to care when recovery does not feel right."
+              bullets={[
+                "No app download",
+                "Call and SMS support",
+                "Early access waitlist",
+              ]}
+              href="#contact"
+              cta="Join waitlist"
+              muted
+            />
+          </StaggerItem>
+        </Stagger>
       </div>
     </section>
   );
 }
 
-/* -------------------- Problem -------------------- */
-
-function ProblemSection() {
-  return (
-    <section id="problem" className="bg-surface-tinted">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="grid gap-12 md:grid-cols-2 md:items-start">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-              The Postpartum Cliff
-            </p>
-            <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
-              Maternal care stops at the hospital doors.
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-              The most dangerous weeks of a mother&rsquo;s recovery happen after
-              discharge — far from the clinicians trained to spot trouble.
-              Overworked midwives can&rsquo;t manually call every mother. Warning
-              signs go unseen. And mothers who feel forgotten quietly switch
-              hospitals for their next pregnancy.
-            </p>
-
-            <div className="mt-10 rounded-2xl border border-line bg-white p-6">
-              <p className="font-serif text-4xl text-plum">71.8%</p>
-              <p className="mt-2 text-sm text-ink-soft">
-                of Ghanaian mothers complete the full maternal care continuum.
-                The other 28% are lost — to complications, depression, or
-                another hospital.
-              </p>
-              <p className="mt-3 text-[11px] uppercase tracking-[0.16em] text-ink-muted">
-                Source: [ Ghana Maternal Health Survey · year ]
-              </p>
-            </div>
-
-            <MediaPlaceholder
-              kind="image"
-              ratio="aspect-[16/9]"
-              label="Editorial photo: mother and newborn at home, week three"
-              className="mt-6"
-            />
-          </div>
-
-          <ul className="space-y-4">
-            <ProblemCard
-              title="Protocol failures"
-              body="Forgotten antibiotics, missed iron supplementation, skipped wound care — silent breakdowns no one catches until a readmission."
-            />
-            <ProblemCard
-              title="Missed warning signs"
-              body="Preeclampsia, postpartum haemorrhage, and postpartum depression often present in the first 14 days at home, when no one is watching."
-            />
-            <ProblemCard
-              title="Lost retention"
-              body="A mother who feels abandoned doesn't write a complaint. She just delivers her next baby — and refers her sisters — somewhere else."
-            />
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ProblemCard({ title, body }: { title: string; body: string }) {
-  return (
-    <li className="rounded-2xl border border-line bg-white p-6">
-      <div className="flex items-start gap-4">
-        <span className="mt-1 flex h-8 w-8 flex-none items-center justify-center rounded-full bg-plum-50 text-plum">
-          <Cross className="h-4 w-4" />
-        </span>
-        <div>
-          <h3 className="font-serif text-xl text-navy">{title}</h3>
-          <p className="mt-2 text-sm leading-relaxed text-ink-soft">{body}</p>
-        </div>
-      </div>
-    </li>
-  );
-}
-
-/* -------------------- How it works -------------------- */
-
-function HowItWorks() {
-  return (
-    <section id="how" className="bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="grid gap-10 md:grid-cols-[1fr_1.1fr] md:items-end">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-              How Bloom works
-            </p>
-            <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
-              Three components. Zero app friction for mothers.
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-              Bloom slots into your existing discharge workflow — no app
-              downloads, no smartphone required. Just a phone number and a
-              midwife.
-            </p>
-          </div>
-          <MediaPlaceholder
-            kind="video"
-            ratio="aspect-[16/10]"
-            label="90-second product walkthrough — Hospital portal &amp; AI call demo"
-          />
-        </div>
-
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          <Component
-            number="01"
-            title="The Hospital Portal"
-            audience="For your team"
-            body="A 3-minute discharge onboarding form and a lightweight clinical dashboard. No bloat, no retraining — designed to live alongside the workflows your midwives already use."
-            bullets={[
-              "Mother profile in under 3 minutes",
-              "Triaged escalation queue",
-              "Audit trail per patient",
-            ]}
-            media={
-              <MediaPlaceholder
-                kind="image"
-                ratio="aspect-[5/3]"
-                label="Screenshot · clinician dashboard"
-                className="mt-5"
-              />
-            }
-          />
-          <Component
-            number="02"
-            title="The Proactive AI Call"
-            audience="For the mother"
-            body="Scheduled outbound voice check-ins on mood, sleep, pain, and feeding — in her language, tailored to her delivery type (vaginal, C-section, complicated)."
-            bullets={[
-              "Delivery-specific question sets",
-              "Local language support",
-              "No app, no smartphone needed",
-            ]}
-            featured
-            media={
-              <AudioSample
-                variant="dark"
-                label="Listen · postnatal check-in (Twi)"
-                src="/assets/sample-call.mp3"
-                caption="[ Drop sample MP3 at /public/assets/sample-call.mp3 ]"
-                className="mt-5"
-              />
-            }
-          />
-          <Component
-            number="03"
-            title="The SMS Companion"
-            audience="For the mother"
-            body="Plain-text follow-ups with actionable summaries — &lsquo;take your antibiotics tonight&rsquo; — and a two-way channel that escalates straight to your clinical team."
-            bullets={[
-              "Medication and care reminders",
-              "Two-way reply for concerns",
-              "Auto-escalation to staff",
-            ]}
-            media={
-              <MediaPlaceholder
-                kind="image"
-                ratio="aspect-[5/3]"
-                label="Screenshot · SMS thread"
-                className="mt-5"
-              />
-            }
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function Component({
-  number,
+function AudienceCard({
   title,
-  audience,
   body,
   bullets,
-  featured,
-  media,
+  href,
+  cta,
+  muted,
 }: {
-  number: string;
   title: string;
-  audience: string;
   body: string;
   bullets: string[];
-  featured?: boolean;
-  media: React.ReactNode;
+  href: string;
+  cta: string;
+  muted?: boolean;
 }) {
   return (
     <article
-      className={`relative flex flex-col rounded-2xl border p-7 ${
-        featured
-          ? "border-navy bg-navy text-white"
-          : "border-line bg-white text-navy"
-      }`}
-    >
-      <div className="flex items-center justify-between">
-        <span
-          className={`font-serif text-2xl ${
-            featured ? "text-periwinkle" : "text-plum"
-          }`}
-        >
-          {number}
-        </span>
-        <span
-          className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${
-            featured ? "text-periwinkle-200" : "text-ink-muted"
-          }`}
-        >
-          {audience}
-        </span>
-      </div>
-
-      {media}
-
-      <h3 className="mt-6 font-serif text-2xl">{title}</h3>
-      <p
-        className={`mt-3 text-sm leading-relaxed ${
-          featured ? "text-periwinkle-200" : "text-ink-soft"
+      className={`rounded-lg border p-6 ${muted ? "border-line bg-surface-tinted" : "border-navy bg-navy text-white"
         }`}
+    >
+      <h3 className="font-serif text-3xl">{title}</h3>
+      <p
+        className={`mt-4 text-sm leading-relaxed ${muted ? "text-ink-soft" : "text-periwinkle-200"
+          }`}
       >
         {body}
       </p>
-      <ul
-        className={`mt-6 space-y-2 border-t pt-5 text-sm ${
-          featured ? "border-navy-700" : "border-line"
-        }`}
-      >
-        {bullets.map((b) => (
-          <li key={b} className="flex items-start gap-2">
+      <ul className="mt-6 space-y-2 text-sm">
+        {bullets.map((bullet) => (
+          <li key={bullet} className="flex items-start gap-2">
             <Check
-              className={`mt-1 h-3.5 w-3.5 flex-none ${
-                featured ? "text-periwinkle" : "text-plum"
-              }`}
+              className={`mt-1 h-3.5 w-3.5 flex-none ${muted ? "text-plum" : "text-periwinkle"
+                }`}
             />
-            <span className={featured ? "text-white" : "text-ink-soft"}>{b}</span>
+            <span className={muted ? "text-ink-soft" : "text-white"}>
+              {bullet}
+            </span>
           </li>
         ))}
       </ul>
-    </article>
-  );
-}
-
-/* -------------------- Trust -------------------- */
-
-function TrustSection() {
-  return (
-    <section id="trust" className="bg-surface-tinted">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="grid gap-12 md:grid-cols-2 md:items-start">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-              Trust, safety &amp; compliance
-            </p>
-            <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
-              Bloom screens. Bloom flags. Your clinicians decide.
-            </h2>
-            <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-              Bloom is not a diagnostic tool. It is a triage and continuity
-              layer that surfaces concerning signals to a human-in-the-loop —
-              your hospital&rsquo;s clinical staff. Every alert ends with a
-              qualified person.
-            </p>
-
-            <div className="mt-10 rounded-2xl border border-line bg-white p-6">
-              <h3 className="font-serif text-xl text-navy">
-                Built for Ghanaian healthcare
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
-                Aligned with the Ghana Data Protection Act 2012. Designed as a
-                secure digital parallel to the physical Ghana Health Service
-                book — not a replacement for it.
-              </p>
-              <ul className="mt-4 space-y-2 text-sm text-ink-soft">
-                <ListCheck>Encrypted data at rest and in transit</ListCheck>
-                <ListCheck>Hospital-controlled access and roles</ListCheck>
-                <ListCheck>Patient-consented enrollment at discharge</ListCheck>
-              </ul>
-            </div>
-          </div>
-
-          <div className="rounded-2xl border border-line bg-white p-7 shadow-sm">
-            <h3 className="font-serif text-2xl text-navy">
-              The 4-Level Severity Framework
-            </h3>
-            <p className="mt-2 text-sm text-ink-soft">
-              Every check-in is classified. Levels 3 and 4 escalate immediately
-              to your clinical team.
-            </p>
-            <ol className="mt-6 space-y-4">
-              <SeverityRow
-                level="1"
-                tone="periwinkle"
-                title="Routine"
-                body="Mother is stable. Logged for the audit trail; no action required."
-              />
-              <SeverityRow
-                level="2"
-                tone="periwinkle"
-                title="Watch"
-                body="Mild discomfort or non-urgent question. Bloom provides reassurance and notes for the next check-in."
-              />
-              <SeverityRow
-                level="3"
-                tone="plum"
-                title="Elevated"
-                body="Concerning symptom or protocol failure. Auto-escalates to the clinician dashboard within minutes."
-                escalate
-              />
-              <SeverityRow
-                level="4"
-                tone="plum"
-                title="Crisis"
-                body="Red-flag emergency signal. Immediate alert to on-call clinical staff with full context."
-                escalate
-              />
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function SeverityRow({
-  level,
-  tone,
-  title,
-  body,
-  escalate,
-}: {
-  level: string;
-  tone: "periwinkle" | "plum";
-  title: string;
-  body: string;
-  escalate?: boolean;
-}) {
-  const badge =
-    tone === "plum" ? "bg-plum text-white" : "bg-periwinkle text-navy";
-  return (
-    <li className="flex gap-4">
-      <span
-        className={`flex h-9 w-9 flex-none items-center justify-center rounded-full font-serif text-sm ${badge}`}
-      >
-        {level}
-      </span>
-      <div className="flex-1">
-        <div className="flex items-center gap-2">
-          <h4 className="font-semibold text-navy">{title}</h4>
-          {escalate && (
-            <span className="rounded-full bg-plum-50 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-plum">
-              Human escalation
-            </span>
-          )}
-        </div>
-        <p className="mt-1 text-sm text-ink-soft">{body}</p>
-      </div>
-    </li>
-  );
-}
-
-function ListCheck({ children }: { children: React.ReactNode }) {
-  return (
-    <li className="flex items-start gap-2">
-      <Check className="mt-1 h-3.5 w-3.5 flex-none text-plum" />
-      <span>{children}</span>
-    </li>
-  );
-}
-
-/* -------------------- Why hospitals (formerly business case) -------------------- */
-
-function BusinessCase() {
-  return (
-    <section id="hospitals" className="bg-navy text-white">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="grid gap-12 md:grid-cols-[1fr_1.2fr] md:items-end">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-periwinkle">
-              Why hospitals choose Bloom
-            </p>
-            <h2 className="mt-4 font-serif text-4xl tracking-tight md:text-5xl">
-              Continuity is the standard your patients are quietly waiting for.
-            </h2>
-          </div>
-          <p className="text-lg leading-relaxed text-periwinkle-200">
-            Modern mothers compare hospitals the way they compare anything else
-            — on the experience. Bloom gives you a credible, clinically-led
-            answer to the question every administrator gets: &ldquo;what
-            happens after I go home?&rdquo;
-          </p>
-        </div>
-
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          <ValueCard
-            title="The retention story"
-            metric="She comes back"
-            metricLabel="for her next pregnancy"
-            body="A proactive, follow-her-home experience that keeps mothers — and the sisters and friends they refer — returning to your hospital."
-          />
-          <ValueCard
-            title="Earlier catches"
-            metric="Days, not weeks"
-            metricLabel="to surface protocol failures"
-            body="Surface missed medications, untreated infections, and red-flag symptoms before they become readmissions or liability events."
-          />
-          <ValueCard
-            title="Staff capacity"
-            metric="A triaged queue"
-            metricLabel="instead of a blanket call list"
-            body="Your midwives stop chasing every mother and start spending their hours on the few who actually need attention today."
-          />
-        </div>
-
-        <div className="mt-12">
-          <MediaPlaceholder
-            kind="image"
-            ratio="aspect-[16/6]"
-            label="Photo: midwives reviewing the Bloom dashboard at the nurses' station"
-            className="border-navy-700 bg-navy-700/40"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function ValueCard({
-  title,
-  metric,
-  metricLabel,
-  body,
-}: {
-  title: string;
-  metric: string;
-  metricLabel: string;
-  body: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-navy-700 bg-navy-700/40 p-7">
-      <p className="font-serif text-2xl text-periwinkle">{metric}</p>
-      <p className="mt-1 text-xs uppercase tracking-wide text-periwinkle-200">
-        {metricLabel}
-      </p>
-      <h3 className="mt-6 font-serif text-xl text-white">{title}</h3>
-      <p className="mt-3 text-sm leading-relaxed text-periwinkle-200">{body}</p>
-    </div>
-  );
-}
-
-/* -------------------- Founders -------------------- */
-
-function Founders() {
-  return (
-    <section id="team" className="bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-            The team behind Bloom
-          </p>
-          <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
-            Built by clinicians and engineers who&rsquo;ve worked maternity in
-            Ghana.
-          </h2>
-          <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-            We&rsquo;re a small team that&rsquo;s spent the last [ N ] months
-            inside private maternity wards in Accra and Kumasi — listening to
-            midwives, sitting in on discharge briefings, and shadowing the
-            calls that already happen on personal phones at midnight.
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          <FounderCard
-            name="[ Co-founder name ]"
-            role="[ Co-founder · CEO ]"
-            bio="[ One-line bio: clinical/operational background, what they bring to Bloom. ]"
-            linkedin="#"
-          />
-          <FounderCard
-            name="[ Co-founder name ]"
-            role="[ Co-founder · CTO ]"
-            bio="[ One-line bio: engineering background, what they&rsquo;ve shipped before, why this. ]"
-            linkedin="#"
-          />
-          <FounderCard
-            name="[ Co-founder / Clinical lead ]"
-            role="[ Co-founder · Clinical Lead ]"
-            bio="[ One-line bio: clinical credentials and the protocols they&rsquo;ve led. ]"
-            linkedin="#"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function FounderCard({
-  name,
-  role,
-  bio,
-  linkedin,
-}: {
-  name: string;
-  role: string;
-  bio: string;
-  linkedin: string;
-}) {
-  return (
-    <article className="flex flex-col rounded-2xl border border-line bg-white p-6">
-      <MediaPlaceholder
-        kind="image"
-        ratio="aspect-square"
-        label={`Portrait · ${name}`}
-      />
-      <h3 className="mt-6 font-serif text-xl text-navy">{name}</h3>
-      <p className="mt-1 text-xs font-semibold uppercase tracking-[0.16em] text-ink-muted">
-        {role}
-      </p>
-      <p className="mt-4 text-sm leading-relaxed text-ink-soft">{bio}</p>
       <a
-        href={linkedin}
-        className="mt-5 inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-plum hover:text-plum-600"
+        href={href}
+        className={`mt-7 inline-flex min-h-10 items-center rounded-full px-5 py-2.5 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${muted
+          ? "border border-navy text-navy hover:bg-navy hover:text-white focus-visible:ring-plum"
+          : "bg-white text-navy hover:bg-periwinkle-50 focus-visible:ring-white focus-visible:ring-offset-navy"
+          }`}
       >
-        LinkedIn
-        <ArrowRight className="h-3 w-3" />
+        {cta}
+        <ArrowRight className="ml-2 h-4 w-4" />
       </a>
     </article>
   );
 }
 
-/* -------------------- For mothers teaser -------------------- */
-
-function ForMothersTeaser() {
+function PilotSection() {
   return (
-    <section className="bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-20">
-        <div className="grid items-center gap-10 rounded-3xl border border-line bg-surface-tinted p-8 md:grid-cols-[1fr_1.1fr] md:p-12">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-              The other side of Bloom
-            </p>
-            <h2 className="mt-3 font-serif text-3xl tracking-tight text-navy md:text-4xl">
-              See what your patients experience.
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-ink-soft">
-              Bloom isn&rsquo;t just a dashboard for your team — it&rsquo;s a
-              warm, six-week companion for every mother in your care. See the
-              calls, messages, and reassurance she receives from the moment she
-              leaves your ward.
-            </p>
-            <Link
-              href="/for-mothers"
-              className="mt-7 inline-flex items-center rounded-full border border-navy bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-navy hover:text-white"
-            >
-              See the mother&rsquo;s experience
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-          </div>
-
-          <MediaPlaceholder
-            kind="image"
-            ratio="aspect-[5/4]"
-            label="Editorial photo: mother on her phone, baby asleep beside her"
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------- Pricing -------------------- */
-
-function Pricing() {
-  return (
-    <section id="pricing" className="bg-surface-tinted">
-      <div className="mx-auto max-w-6xl px-6 py-24">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-            Pricing
+    <section id="pilot" className="bg-navy text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+        <FadeUp>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-periwinkle">
+            Pilot model
           </p>
-          <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
-            Pricing that scales with your hospital.
+          <h2 className="mt-4 font-serif text-4xl tracking-tight md:text-5xl">
+            Start small. Learn fast. Decide with evidence.
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-ink-soft">
-            We don&rsquo;t believe in surprise bills. The 30-day pilot is a
-            flat rate. Ongoing pricing scales with the midwives and active
-            mothers your hospital actually uses — never with what you might
-            use.
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-periwinkle-200">
+            Omaya is currently set up for focused pilots with maternity teams in
+            Ghana.
           </p>
-        </div>
+        </FadeUp>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
-          <PriceCard
-            eyebrow="30-day pilot"
-            headline="From [ GHS X,XXX ]"
-            sub="flat rate · all-inclusive"
-            featured
-            includes={[
-              "Up to [ N ] mothers enrolled",
-              "Hospital portal + clinician dashboard",
-              "AI voice + SMS check-ins, in [ language list ]",
-              "White-glove onboarding for your midwives",
-              "Weekly review with the Bloom team",
-              "Clear go / no-go decision at day 30",
-            ]}
-          />
-          <PriceCard
-            eyebrow="Ongoing partnership"
-            headline="Tailored to your hospital"
-            sub="typical hospitals: [ GHS X ]–[ GHS Y ] / month"
-            includes={[
-              "Per active midwife seat",
-              "Per actively enrolled mother",
-              "Fixed support tier (standard / priority)",
-              "Annual or month-to-month contract",
-              "30-day notice exit, anytime",
-              "You own all patient data, end-to-end",
-            ]}
-          />
-        </div>
-
-        <p className="mt-8 text-xs uppercase tracking-[0.18em] text-ink-muted">
-          Final pricing depends on hospital size, patient volume, and language
-          coverage. Request a pilot for a tailored quote.
-        </p>
-      </div>
-    </section>
-  );
-}
-
-function PriceCard({
-  eyebrow,
-  headline,
-  sub,
-  includes,
-  featured,
-}: {
-  eyebrow: string;
-  headline: string;
-  sub: string;
-  includes: string[];
-  featured?: boolean;
-}) {
-  return (
-    <article
-      className={`flex flex-col rounded-2xl border p-7 ${
-        featured
-          ? "border-navy bg-white shadow-sm"
-          : "border-line bg-white"
-      }`}
-    >
-      <p
-        className={`text-[10px] font-semibold uppercase tracking-[0.18em] ${
-          featured ? "text-plum" : "text-ink-muted"
-        }`}
-      >
-        {eyebrow}
-      </p>
-      <p className="mt-4 font-serif text-3xl text-navy">{headline}</p>
-      <p className="mt-1 text-xs uppercase tracking-wide text-ink-muted">
-        {sub}
-      </p>
-      <ul className="mt-6 space-y-2 border-t border-line pt-5 text-sm">
-        {includes.map((line) => (
-          <li key={line} className="flex items-start gap-2">
-            <Check className="mt-1 h-3.5 w-3.5 flex-none text-plum" />
-            <span className="text-ink-soft">{line}</span>
-          </li>
-        ))}
-      </ul>
-    </article>
-  );
-}
-
-/* -------------------- FAQ -------------------- */
-
-const FAQS: { q: string; a: string }[] = [
-  {
-    q: "Do mothers need a smartphone?",
-    a: "No. Bloom works on any phone that can take a call or receive an SMS. The whole point is that there is no app to download, no account to create, and no smartphone required.",
-  },
-  {
-    q: "What languages are supported?",
-    a: "[ English, Twi, and Ga at launch — more on the roadmap. ] Each mother is checked in in the language she chooses at discharge.",
-  },
-  {
-    q: "Does Bloom integrate with our existing systems?",
-    a: "[ Today Bloom runs alongside your existing EMR / patient registry — no integration is required to start. EMR integrations (e.g. [ system names ]) are on the roadmap and prioritised by hospital demand. ]",
-  },
-  {
-    q: "Who owns the patient data?",
-    a: "Your hospital does. Bloom is operated under your hospital&rsquo;s care, in line with the Ghana Data Protection Act 2012. Data is encrypted at rest and in transit, hospital-controlled access and roles, [ hosted in / region — confirm ]. On exit, you receive a full export and we delete our copy on a defined schedule.",
-  },
-  {
-    q: "How long does implementation take?",
-    a: "[ Typical setup is 2–3 weeks: kickoff call, midwife training, discharge workflow integration, and a soft launch with a small first cohort. First mother is usually enrolled within a month of contract signature. ]",
-  },
-  {
-    q: "What happens if a mother wants to opt out?",
-    a: "She can stop the calls and messages at any time, by reply or by asking your clinical team. Her enrollment is paused immediately and her data handling follows the same hospital-controlled rules as the rest of her record.",
-  },
-];
-
-function Faq() {
-  return (
-    <section id="faq" className="bg-white">
-      <div className="mx-auto max-w-4xl px-6 py-24">
-        <div className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-            Questions admins ask
-          </p>
-          <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
-            Before you talk to us.
-          </h2>
-        </div>
-
-        <ul className="mt-12 divide-y divide-line border-y border-line">
-          {FAQS.map((item) => (
-            <li key={item.q}>
-              <details className="group">
-                <summary className="flex cursor-pointer items-center justify-between gap-4 py-5 text-left list-none">
-                  <h3 className="font-serif text-lg text-navy">{item.q}</h3>
-                  <span
-                    aria-hidden
-                    className="flex h-7 w-7 flex-none items-center justify-center rounded-full border border-line text-navy transition group-open:rotate-45 group-open:bg-plum group-open:text-white group-open:border-plum"
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      className="h-3.5 w-3.5"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      aria-hidden
-                    >
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
+        <Stagger className="grid gap-4" interval={0.12}>
+          {PILOT_STEPS.map((step, index) => (
+            <StaggerItem key={step}>
+              <div className="rounded-lg border border-white/15 bg-white/[0.08] p-5">
+                <div className="flex gap-4">
+                  <span className="flex h-8 w-8 flex-none items-center justify-center rounded-full bg-periwinkle text-sm font-semibold text-navy">
+                    {index + 1}
                   </span>
-                </summary>
-                <p
-                  className="pb-6 pr-12 text-sm leading-relaxed text-ink-soft"
-                  dangerouslySetInnerHTML={{ __html: item.a }}
-                />
-              </details>
-            </li>
+                  <p className="font-serif text-2xl leading-tight">{step}</p>
+                </div>
+              </div>
+            </StaggerItem>
           ))}
-        </ul>
+          <StaggerItem>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <a
+                href={`mailto:${OMAYA_EMAIL}`}
+                className="inline-flex min-h-10 items-center rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-navy transition hover:bg-periwinkle-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+              >
+                Email Omaya
+              </a>
+              <a
+                href={`tel:${OMAYA_PHONE_TEL}`}
+                className="inline-flex min-h-10 items-center rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-navy"
+              >
+                {OMAYA_PHONE_DISPLAY}
+              </a>
+            </div>
+          </StaggerItem>
+        </Stagger>
       </div>
     </section>
   );
 }
 
-/* -------------------- Final CTA / form -------------------- */
-
-function FinalCta() {
+function ContactSection() {
   return (
-    <section id="pilot" className="relative overflow-hidden bg-periwinkle-50">
-      <FlowerMark
-        aria-hidden
-        className="pointer-events-none absolute -top-16 -right-20 h-96 w-96 opacity-[0.06]"
-        size={384}
-      />
-      <div className="relative mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr] md:items-start">
-        <div>
+    <section id="contact" className="bg-periwinkle-50">
+      <div className="mx-auto grid max-w-6xl gap-10 px-6 py-20 md:grid-cols-[0.85fr_1.15fr] md:items-start">
+        <FadeUp>
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
-            Request a pilot
+            Contact
           </p>
-          <h2 className="mt-3 font-serif text-4xl tracking-tight text-navy md:text-5xl">
-            Modern maternity care doesn&rsquo;t end at discharge.
+          <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
+            Tell us where Omaya should begin.
           </h2>
-          <CareTagline className="mt-5" height={32} />
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-            Tell us about your hospital and we&rsquo;ll set up a 30-minute call
-            to walk through the dashboard, discuss your discharge workflow, and
-            outline a 30-day pilot.
+          <p className="mt-5 max-w-lg text-base leading-relaxed text-ink-soft">
+            Request a hospital pilot, book a walkthrough, or join the early
+            access list for mothers.
           </p>
-
-          <div className="mt-8 rounded-2xl border border-white bg-white/70 p-6 backdrop-blur">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-plum">
-              After you submit
-            </p>
-            <ol className="mt-4 space-y-4 text-sm text-ink-soft">
-              <NextStep
-                index="1"
-                title="A calendar link, within one working day"
-                body="From a real human on our team — usually [ Frederick / Joy ] — with two or three time options."
-              />
-              <NextStep
-                index="2"
-                title="A 30-minute walkthrough call"
-                body="We show the live dashboard, talk through your discharge workflow, and answer the questions your medical director will ask."
-              />
-              <NextStep
-                index="3"
-                title="A tailored 30-day pilot proposal"
-                body="Scope, pricing, language coverage, and timelines — written down, with a clear go / no-go date."
-              />
-            </ol>
+          <div className="mt-8 space-y-3 text-sm text-ink-soft">
+            <ContactLine
+              label="Email"
+              value={OMAYA_EMAIL}
+              href={`mailto:${OMAYA_EMAIL}`}
+            />
+            <ContactLine
+              label="Phone"
+              value={OMAYA_PHONE_DISPLAY}
+              href={`tel:${OMAYA_PHONE_TEL}`}
+            />
+            <ContactLine
+              label="WhatsApp"
+              value="Message Omaya"
+              href={OMAYA_WHATSAPP}
+            />
           </div>
+        </FadeUp>
 
-          <ul className="mt-8 space-y-3 text-sm text-ink-soft">
-            <ListCheck>30-day pilot, with a clear go/no-go review</ListCheck>
-            <ListCheck>White-glove onboarding for your midwives</ListCheck>
-            <ListCheck>You own all patient data, end-to-end</ListCheck>
-          </ul>
-        </div>
-
-        <ContactForm />
+        <FadeUp delay={0.2}>
+          <ContactForm />
+        </FadeUp>
       </div>
     </section>
   );
 }
 
-function NextStep({
-  index,
-  title,
-  body,
+function ContactLine({
+  label,
+  value,
+  href,
 }: {
-  index: string;
-  title: string;
-  body: string;
+  label: string;
+  value: string;
+  href: string;
 }) {
   return (
-    <li className="flex gap-4">
-      <span className="flex h-7 w-7 flex-none items-center justify-center rounded-full bg-plum font-serif text-sm text-white">
-        {index}
-      </span>
-      <div>
-        <p className="font-semibold text-navy">{title}</p>
-        <p className="mt-1 leading-relaxed">{body}</p>
-      </div>
-    </li>
+    <p>
+      <span className="font-semibold text-navy">{label}: </span>
+      <a href={href} className="text-plum hover:text-plum-600 hover:underline">
+        {value}
+      </a>
+    </p>
   );
 }

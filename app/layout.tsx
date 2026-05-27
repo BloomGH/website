@@ -1,14 +1,16 @@
 import type { Metadata } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Lora, Montserrat } from "next/font/google";
 import "./globals.css";
 import { SiteNav } from "./site-nav";
 import { SiteFooter } from "./components";
 
-const inter = Inter({
-  variable: "--font-inter",
+
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   display: "swap",
-});
+})
 
 const lora = Lora({
   variable: "--font-lora",
@@ -17,9 +19,13 @@ const lora = Lora({
 });
 
 export const metadata: Metadata = {
-  title: "Bloom — Care that follows her home",
+  title: "Omaya - Postpartum care that follows mothers home",
   description:
-    "AI-assisted maternal continuity for private maternity hospitals in Ghana. Bridge the gap between discharge and the 6-week checkup.",
+    "Omaya helps hospitals check in with mothers after discharge through calls, SMS, and clinical escalation during postpartum recovery.",
+  icons: {
+    icon: "/assets/logo.svg",
+    apple: "/assets/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${lora.variable} h-full antialiased`}
+      className={`${montserrat.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-ink">
         <SiteNav />

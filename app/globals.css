@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme inline {
   /* Brand palette */
@@ -22,8 +22,13 @@
   --color-surface-tinted: #f8fafc;
 
   /* Typography */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans:
+    var(--font-montserrat), ui-sans-serif, Montserrat, system-ui, sans-serif;
   --font-serif: var(--font-lora), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 html,
@@ -34,7 +39,7 @@ body {
 
 body {
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv11";
+  font-feature-settings: 'ss01', 'cv11';
   -webkit-font-smoothing: antialiased;
 }
 
