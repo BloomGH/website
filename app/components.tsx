@@ -6,6 +6,14 @@ export const OMAYA_PHONE_TEL = "+233559627280";
 export const OMAYA_WHATSAPP =
   "https://wa.me/233559627280?text=Hi%20Omaya%2C%20I%27d%20like%20to%20book%20a%20call.";
 
+/* -------------------- Site identity -------------------- */
+
+export const SITE_URL = "https://omayacare.com";
+export const SITE_NAME = "Omaya";
+export const SITE_TITLE = "Omaya — Postpartum care that follows mothers home";
+export const SITE_DESCRIPTION =
+  "Omaya helps hospitals check in with mothers after discharge through calls, SMS, and clinical escalation during postpartum recovery.";
+
 /* -------------------- Brand -------------------- */
 
 export function OmayaMark({

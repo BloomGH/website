@@ -1,0 +1,31 @@
+# Omaya
+
+> Omaya is a postpartum care service that follows mothers home after hospital discharge. It checks in with mothers by phone call and SMS during recovery and escalates concerning cases to the hospital's clinical team.
+
+## What Omaya does
+
+- Enroll at discharge: a nurse adds the mother, delivery notes, language, and next check-in before she leaves.
+- Check in by call and SMS: Omaya asks about pain, bleeding, mood, sleep, feeding, medication, and warning signs.
+- Escalate the few who need care: stable updates are logged; concerning answers go to the clinical team with context.
+
+## Who it is for
+
+- Hospitals and maternity teams: a triaged queue instead of a manual follow-up call list, with an audit trail per mother.
+- Mothers: simple check-ins, reminders, and a clear path back to care when recovery does not feel right.
+
+## Key facts
+
+- No app and no smartphone required — works over phone calls and SMS on any phone.
+- Human-led: the hospital's clinical team stays in control of care decisions.
+- After-discharge follow-up extends up to one year postpartum.
+- Currently running focused pilots with maternity teams in Ghana.
+
+## Start a pilot
+
+A pilot maps your discharge workflow, enrolls a first cohort of mothers, then reviews alerts, response time, and patient feedback.
+
+## Contact
+
+- Website: https://omayacare.com
+- Email: admin@omayacare.com
+- Phone / WhatsApp: +233 55 962 7280

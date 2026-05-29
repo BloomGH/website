@@ -1,8 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Lora, Montserrat } from "next/font/google";
 import "./globals.css";
 import { SiteNav } from "./site-nav";
-import { SiteFooter } from "./components";
+import {
+  SiteFooter,
+  SITE_DESCRIPTION,
+  SITE_NAME,
+  SITE_TITLE,
+  SITE_URL,
+} from "./components";
+import { StructuredData } from "./structured-data";
 
 
 
@@ -18,14 +25,73 @@ const lora = Lora({
   display: "swap",
 });
 
+const OG_IMAGE = {
+  url: "/assets/call_by_window-omaya.png",
+  width: 1448,
+  height: 1086,
+  alt: "A mother taking an Omaya care call at home",
+};
+
 export const metadata: Metadata = {
-  title: "Omaya - Postpartum care that follows mothers home",
-  description:
-    "Omaya helps hospitals check in with mothers after discharge through calls, SMS, and clinical escalation during postpartum recovery.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: SITE_TITLE,
+    template: `%s · ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  keywords: [
+    "postpartum care",
+    "maternal health",
+    "after-discharge follow-up",
+    "postpartum recovery",
+    "hospital patient check-ins",
+    "clinical escalation",
+    "SMS health check-ins",
+    "maternal continuity of care",
+    "Ghana maternal health",
+    "Omaya",
+  ],
+  authors: [{ name: SITE_NAME }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    siteName: SITE_NAME,
+    locale: "en_GH",
+    url: "/",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE.url],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: "/assets/logo.svg",
     apple: "/assets/logo.svg",
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#1e2d42",
 };
 
 export default function RootLayout({
@@ -39,6 +105,7 @@ export default function RootLayout({
       className={`${montserrat.variable} ${lora.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white text-ink">
+        <StructuredData />
         <SiteNav />
         <main className="flex-1">{children}</main>
         <SiteFooter />

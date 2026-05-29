@@ -16,6 +16,7 @@ import {
   Stagger,
   StaggerItem,
 } from "./animations";
+import { FAQS } from "./faq-data";
 
 const PRODUCT_STEPS = [
   {
@@ -46,6 +47,7 @@ export default function Home() {
       <ProductSection />
       <AudienceSection />
       <PilotSection />
+      <FAQSection />
       <ContactSection />
     </>
   );
@@ -83,6 +85,10 @@ function Hero() {
           <StaggerItem>
             <h1 className="mt-6 font-serif text-6xl leading-[0.95] tracking-tight md:text-8xl">
               Omaya
+              <span className="sr-only">
+                {" "}
+                — postpartum care that follows mothers home
+              </span>
             </h1>
           </StaggerItem>
           <StaggerItem>
@@ -456,6 +462,38 @@ function PilotSection() {
               </a>
             </div>
           </StaggerItem>
+        </Stagger>
+      </div>
+    </section>
+  );
+}
+
+function FAQSection() {
+  return (
+    <section id="faq" className="bg-white">
+      <div className="mx-auto max-w-6xl px-6 py-20">
+        <FadeUp className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
+            FAQ
+          </p>
+          <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
+            Questions about Omaya, answered.
+          </h2>
+        </FadeUp>
+
+        <Stagger className="mt-10 grid gap-4 md:grid-cols-2" interval={0.1}>
+          {FAQS.map((faq) => (
+            <StaggerItem key={faq.question}>
+              <article className="h-full rounded-lg border border-line bg-surface-tinted p-6">
+                <h3 className="font-serif text-xl leading-snug text-navy">
+                  {faq.question}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                  {faq.answer}
+                </p>
+              </article>
+            </StaggerItem>
+          ))}
         </Stagger>
       </div>
     </section>
