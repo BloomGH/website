@@ -10,8 +10,7 @@ import {
   SITE_URL,
 } from "./components";
 import { StructuredData } from "./structured-data";
-
-
+import { OG_IMAGE } from "./seo";
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -25,32 +24,30 @@ const lora = Lora({
   display: "swap",
 });
 
-const OG_IMAGE = {
-  url: "/assets/call_by_window-omaya.png",
-  width: 1448,
-  height: 1086,
-  alt: "A mother taking an Omaya care call at home",
-};
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
     default: SITE_TITLE,
-    template: `%s · ${SITE_NAME}`,
+    template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   applicationName: SITE_NAME,
   keywords: [
+    "Omaya",
+    "Omaya Care",
     "postpartum care",
+    "postpartum care Ghana",
+    "postpartum Ghana",
+    "postnatal care Ghana",
     "maternal health",
+    "maternal health Ghana",
     "after-discharge follow-up",
     "postpartum recovery",
     "hospital patient check-ins",
     "clinical escalation",
     "SMS health check-ins",
     "maternal continuity of care",
-    "Ghana maternal health",
-    "Omaya",
+    "maternal health startup Ghana",
   ],
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,

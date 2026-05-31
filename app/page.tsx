@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import heroImage from "../public/assets/call_by_window-omaya.png";
 import {
   ArrowRight,
@@ -17,6 +18,10 @@ import {
   StaggerItem,
 } from "./animations";
 import { FAQS } from "./faq-data";
+import { createPageMetadata, SEO_PAGES } from "./seo";
+import { PageStructuredData } from "./structured-data";
+
+export const metadata = createPageMetadata(SEO_PAGES.home);
 
 const PRODUCT_STEPS = [
   {
@@ -42,8 +47,10 @@ const PILOT_STEPS = [
 export default function Home() {
   return (
     <>
+      <PageStructuredData page={SEO_PAGES.home} faqs={FAQS} />
       <Hero />
       <SignalStrip />
+      <SeoClusterSection />
       <ProductSection />
       <AudienceSection />
       <PilotSection />
@@ -93,7 +100,8 @@ function Hero() {
           </StaggerItem>
           <StaggerItem>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/[0.86] sm:text-xl md:text-2xl">
-              Check-ins for mothers. Escalation alerts for hospitals.
+              Postpartum care and maternal health follow-up in Ghana through
+              calls, SMS, and hospital escalation.
             </p>
           </StaggerItem>
           <StaggerItem>
@@ -168,6 +176,47 @@ function Signal({ label, value }: { label: string; value: string }) {
       </p>
       <p className="mt-2 font-serif text-2xl leading-tight text-navy">{value}</p>
     </div>
+  );
+}
+
+function SeoClusterSection() {
+  return (
+    <section className="bg-periwinkle-50">
+      <div className="mx-auto max-w-6xl px-6 py-16">
+        <FadeUp className="max-w-2xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-plum">
+            Ghana maternal health
+          </p>
+          <h2 className="mt-4 font-serif text-4xl tracking-tight text-navy md:text-5xl">
+            Learn how Omaya supports postpartum follow-up.
+          </h2>
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-ink-soft">
+            Omaya focuses on postpartum care in Ghana, maternal health
+            continuity, and simple follow-up workflows for hospitals and
+            mothers.
+          </p>
+        </FadeUp>
+        <Stagger className="mt-10 grid gap-4 md:grid-cols-3" interval={0.1}>
+          {SEO_PAGES.home.related.map((link) => (
+            <StaggerItem key={link.href}>
+              <Link
+                href={link.href}
+                className="block h-full rounded-lg border border-line bg-white p-6 transition hover:border-navy"
+              >
+                <h3 className="font-serif text-2xl text-navy">{link.label}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                  {link.description}
+                </p>
+                <span className="mt-5 inline-flex items-center text-sm font-semibold text-plum">
+                  Read more
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </span>
+              </Link>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </div>
+    </section>
   );
 }
 

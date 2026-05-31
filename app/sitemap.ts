@@ -1,13 +1,11 @@
 import type { MetadataRoute } from "next";
-import { SITE_URL } from "./components";
+import { absoluteUrl, INDEXABLE_PAGES } from "./seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
-    {
-      url: SITE_URL,
-      lastModified: new Date(),
-      changeFrequency: "always",
-      priority: 1,
-    },
-  ];
+  return INDEXABLE_PAGES.map((page) => ({
+    url: absoluteUrl(page.path),
+    lastModified: page.lastModified,
+    changeFrequency: page.changeFrequency,
+    priority: page.priority,
+  }));
 }

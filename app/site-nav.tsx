@@ -5,9 +5,11 @@ import Link from "next/link";
 import { OmayaLockup, OMAYA_WHATSAPP } from "./components";
 
 const NAV_LINKS = [
-  { href: "/#product", label: "Product" },
-  { href: "/#audiences", label: "For hospitals & mothers" },
-  { href: "/#pilot", label: "Pilot" },
+  { href: "/postpartum-care-ghana", label: "Postpartum care" },
+  { href: "/maternal-health-ghana", label: "Maternal health" },
+  { href: "/for-hospitals", label: "Hospitals" },
+  { href: "/for-mothers", label: "Mothers" },
+  { href: "/about", label: "About" },
 ];
 
 export function SiteNav() {
@@ -26,7 +28,7 @@ export function SiteNav() {
           <OmayaLockup />
         </Link>
 
-        <nav className="hidden items-center gap-7 text-sm text-ink-soft md:flex">
+        <nav className="hidden items-center gap-5 text-sm text-ink-soft md:flex">
           {NAV_LINKS.map((link) => (
             <Link key={link.href} href={link.href} className="hover:text-navy">
               {link.label}

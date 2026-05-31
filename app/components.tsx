@@ -10,9 +10,10 @@ export const OMAYA_WHATSAPP =
 
 export const SITE_URL = "https://omayacare.com";
 export const SITE_NAME = "Omaya";
-export const SITE_TITLE = "Omaya — Postpartum care that follows mothers home";
+export const SITE_TITLE =
+  "Omaya | Postpartum Care and Maternal Health Follow-Up in Ghana";
 export const SITE_DESCRIPTION =
-  "Omaya helps hospitals check in with mothers after discharge through calls, SMS, and clinical escalation during postpartum recovery.";
+  "Omaya provides postpartum care and maternal health follow-up in Ghana through phone calls, SMS check-ins, and hospital escalation after discharge.";
 
 /* -------------------- Brand -------------------- */
 
@@ -120,44 +121,44 @@ export function SiteFooter() {
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
-            Landing page
+            SEO pages
           </p>
           <ul className="mt-4 space-y-2 text-sm text-ink-soft">
             <li>
-              <Link href="/#product" className="hover:text-navy">
-                Product
+              <Link href="/postpartum-care-ghana" className="hover:text-navy">
+                Postpartum care Ghana
               </Link>
             </li>
             <li>
-              <Link href="/#audiences" className="hover:text-navy">
-                Who it helps
+              <Link href="/maternal-health-ghana" className="hover:text-navy">
+                Maternal health Ghana
               </Link>
             </li>
             <li>
-              <Link href="/#pilot" className="hover:text-navy">
-                Pilot
+              <Link href="/about" className="hover:text-navy">
+                About Omaya
               </Link>
             </li>
           </ul>
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
-            Contact
+            Audiences
           </p>
           <ul className="mt-4 space-y-2 text-sm text-ink-soft">
             <li>
+              <Link href="/for-hospitals" className="hover:text-navy">
+                For hospitals
+              </Link>
+            </li>
+            <li>
+              <Link href="/for-mothers" className="hover:text-navy">
+                For mothers
+              </Link>
+            </li>
+            <li>
               <a href={`mailto:${OMAYA_EMAIL}`} className="hover:text-navy">
                 {OMAYA_EMAIL}
-              </a>
-            </li>
-            <li>
-              <a href={`tel:${OMAYA_PHONE_TEL}`} className="hover:text-navy">
-                {OMAYA_PHONE_DISPLAY}
-              </a>
-            </li>
-            <li>
-              <a href={OMAYA_WHATSAPP} className="hover:text-navy">
-                WhatsApp Omaya
               </a>
             </li>
           </ul>

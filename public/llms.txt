@@ -1,6 +1,14 @@
 # Omaya
 
-> Omaya is a postpartum care service that follows mothers home after hospital discharge. It checks in with mothers by phone call and SMS during recovery and escalates concerning cases to the hospital's clinical team.
+> Omaya, also known as Omaya Care, is a Ghana-focused postpartum care and maternal health follow-up service. It checks in with mothers by phone call and SMS after hospital discharge and escalates concerning cases to the hospital's clinical team.
+
+## Search identity
+
+- Public brand: Omaya
+- Alternate name: Omaya Care
+- Website: https://omayacare.com
+- Country focus: Ghana
+- Core topics: postpartum care Ghana, maternal health Ghana, postnatal care Ghana, hospital discharge follow-up, maternal continuity of care, SMS health check-ins, clinical escalation
 
 ## What Omaya does
 
@@ -19,10 +27,31 @@
 - Human-led: the hospital's clinical team stays in control of care decisions.
 - After-discharge follow-up extends up to one year postpartum.
 - Currently running focused pilots with maternity teams in Ghana.
+- Omaya supports follow-up and escalation. It does not replace urgent care, qualified clinical judgment, or professional medical advice.
+
+## Important pages
+
+- Homepage: https://omayacare.com
+- Postpartum care in Ghana: https://omayacare.com/postpartum-care-ghana
+- Maternal health in Ghana: https://omayacare.com/maternal-health-ghana
+- For hospitals: https://omayacare.com/for-hospitals
+- For mothers: https://omayacare.com/for-mothers
+- About Omaya: https://omayacare.com/about
+- Sitemap: https://omayacare.com/sitemap.xml
+- Robots: https://omayacare.com/robots.txt
 
 ## Start a pilot
 
 A pilot maps your discharge workflow, enrolls a first cohort of mothers, then reviews alerts, response time, and patient feedback.
+
+## Offsite SEO checklist
+
+- Verify Google Search Console and submit https://omayacare.com/sitemap.xml.
+- Request indexing for the homepage and all important pages.
+- Create or optimize a Google Business Profile as Omaya if eligible.
+- Keep name, phone, website, country focus, and service description consistent across citations.
+- Add credible entity links from MEST/Bloom, LinkedIn, founder profiles, pilot or partner mentions, startup directories, and relevant Ghana health innovation listings.
+- Track search visibility for: omaya, omaya care, postpartum care ghana, postpartum ghana, maternal health ghana, postnatal care ghana.
 
 ## Contact
 
